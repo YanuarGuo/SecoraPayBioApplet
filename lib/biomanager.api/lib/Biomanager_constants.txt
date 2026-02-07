@@ -1,0 +1,14 @@
+Biomanager persistent states:
+	FACTORY_STATE 						= (short) 0x5A69;
+	CARD_PRODUCTION 					= (short) 0x5AA5;
+	READY_TO_ENROLL 					= (short) 0x5A5A;
+	FINGER1_ENROLLMENT_IN_PROGRESS 		= (short) 0x5A3C;
+	PARTIALLY_ENROLLED 					= (short) 0x5AC3;
+	FINGER2_ENROLLMENT_IN_PROGRESS 		= (short) 0xA53C;
+	ENROLLED_WITH_PIN 					= (short) 0xA5C3;
+	ENROLLED_WITHOUT_PIN 				= (short) 0xA55A;
+	BIOMETRIC_ENABLED 					= (short) 0xA5A5;
+	BIOMETRIC_DISABLED 					= (short) 0xA569;
+	ENROLLMENT_AT_POS_IN_PROGRESS 		= (short) 0xA596;
+	ENROLLED_AT_POS 					= (short) 0x5A96;
+	DISABLED 							= (short) 0xFFFF;

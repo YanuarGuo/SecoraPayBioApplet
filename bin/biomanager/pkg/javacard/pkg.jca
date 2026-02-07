@@ -1,0 +1,532 @@
+// converted by version  [v3.1.0]
+// on Fri Feb 06 14:12:39 ICT 2026
+
+.package biomanager/pkg {
+	.aid 0xA0:0x0:0x0:0x0:0x4;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.8;		//javacard/framework
+		0xA0:0x0:0x0:0x1:0x51:0x8 1.1;		//org/globalplatform/broker
+		0xD2:0x76:0x0:0x0:0x4:0x15:0x2:0x0:0x0:0x9:0x0:0x1 1.0;		//com/ifx/javacard/applets/biometry/biomanager
+		0xA0:0x0:0x0:0x1:0x51:0x0 1.6;		//org/globalplatform
+	}
+
+	.applet {
+		0xA0:0x0:0x0:0x0:0x4:0x10:0x10 BiomanagerInterface;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef short BiomanagerInterface/MATCHING_STATUS;
+		// 1
+		instanceFieldRef short BiomanagerInterface/MATCHING_SCORE;
+		// 2
+		instanceFieldRef 2.3 BiomanagerInterface/BIOMANAGER_HANDLE;
+		// 3
+		staticMethodRef BiomanagerInterface/<init>([BSB)V;
+		// 4
+		.classRef BiomanagerInterface;
+		// 5
+		virtualMethodRef 1.3.1()V;		// register()V
+		// 6
+		virtualMethodRef 1.10.1()[B;		// getBuffer()[B
+		// 7
+		virtualMethodRef 1.3.3()Z;		// selectingApplet()Z
+		// 8
+		staticMethodRef 1.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 9
+		staticMethodRef BiomanagerInterface/getBioManagerHandle()V;
+		// 10
+		virtualMethodRef BiomanagerInterface/processVerifyFingerprint(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 11
+		virtualMethodRef BiomanagerInterface/processGetCounter(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 12
+		virtualMethodRef BiomanagerInterface/processGetSupportedFingers(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 13
+		virtualMethodRef BiomanagerInterface/processGetBiomanagerStatus(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 14
+		virtualMethodRef BiomanagerInterface/processEnableBiomanager(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 15
+		virtualMethodRef BiomanagerInterface/processResetCounter(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 16
+		virtualMethodRef BiomanagerInterface/processChangeEPIN(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 17
+		staticMethodRef 1.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 18
+		.classRef 2.3;		// org/globalplatform/broker/CDCVMBrokerCallbackRequest
+		// 19
+		staticMethodRef 1.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+		// 20
+		virtualMethodRef 1.10.8(SS)V;		// setOutgoingAndSend(SS)V
+		// 21
+		.classRef 3.0;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+		// 22
+		staticMethodRef 4.3.10(Ljavacard/framework/AID;S)Lorg/globalplatform/GlobalService;;		// org/globalplatform/GPSystem.getService(Ljavacard/framework/AID;S)Lorg/globalplatform/GlobalService;
+			.descriptor	Ljavacard/framework/AID;	1.6;
+			.descriptor	Lorg/globalplatform/GlobalService;	4.5;
+
+		// 23
+		staticMethodRef 4.3.9(Ljavacard/framework/AID;)Lorg/globalplatform/GPRegistryEntry;;		// org/globalplatform/GPSystem.getRegistryEntry(Ljavacard/framework/AID;)Lorg/globalplatform/GPRegistryEntry;
+			.descriptor	Ljavacard/framework/AID;	1.6;
+			.descriptor	Lorg/globalplatform/GPRegistryEntry;	4.4;
+
+		// 24
+		.classRef 4.5;		// org/globalplatform/GlobalService
+	}
+
+	.interface public abstract Const 0 {
+
+		.fields {
+			public static final byte CLA = -128;		// B
+			public static final byte VERIFY = 1;		// B
+			public static final byte GET_COUNTER = 2;		// B
+			public static final byte GET_SUPPORTED_FINGERS = 3;		// B
+			public static final byte GET_STATUS = 4;		// B
+			public static final byte ENABLE_BIOMANAGER = 5;		// B
+			public static final byte RESET_COUNTER = 6;		// B
+			public static final byte CHANGE_EPIN = 7;		// B
+		}
+
+	}
+
+	.class public BiomanagerInterface 1 extends 1.3 {		// extends javacard/framework/Applet
+
+		.shareable;
+
+		.fields {
+			 2.3 BIOMANAGER_HANDLE 0;		// Lorg/globalplatform/broker/CDCVMBrokerCallbackRequest;
+			 short MATCHING_STATUS 1;		// S
+			 short MATCHING_SCORE 2;		// S
+		}
+
+		.publicMethodTable 5 16 {
+			equals(Ljava/lang/Object;)Z 0;
+			register()V 1;
+			register([BSB)V 2;
+			selectingApplet()Z 3;
+			deselect()V 4;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable; 5;
+			select()Z 6;
+			process(Ljavacard/framework/APDU;)V 7;
+			processVerifyFingerprint(Ljavacard/framework/APDU;)V 255;
+			processGetCounter(Ljavacard/framework/APDU;)V 255;
+			processGetSupportedFingers(Ljavacard/framework/APDU;)V 255;
+			processGetBiomanagerStatus(Ljavacard/framework/APDU;)V 255;
+			processEnableBiomanager(Ljavacard/framework/APDU;)V 255;
+			processResetCounter(Ljavacard/framework/APDU;)V 255;
+			processChangeEPIN(Ljavacard/framework/APDU;)V 255;
+			onBrokerEvent(SSSSSSSSS)V 255;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 1.2 { 		// javacard/framework/Shareable
+			}
+
+			.interface 2.1 { 		// org/globalplatform/broker/BrokerListener
+				15;		// onBrokerEvent(SSSSSSSSS)V
+			}
+
+			.interface 2.4 { 		// org/globalplatform/broker/CDCVMBrokerListener
+				15;		// onBrokerEvent(SSSSSSSSS)V
+			}
+
+			.interface Const { 
+			}
+
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 4;
+			.locals 0;
+
+				L0:	new 4;		// biomanager/pkg/BiomanagerInterface
+					aload_0;
+					sload_1;
+					sload_2;
+					invokespecial 3;		// biomanager/pkg/BiomanagerInterface.<init>([BSB)V
+					return;
+		}
+
+		.method protected <init>([BSB)V 1 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 17;		// javacard/framework/Applet.<init>()V
+					sconst_0;
+					putfield_s_this 0;		// short biomanager/pkg/BiomanagerInterface.MATCHING_STATUS
+					sconst_0;
+					putfield_s_this 1;		// short biomanager/pkg/BiomanagerInterface.MATCHING_SCORE
+					aload_0;
+					invokevirtual 5;		// register()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 2;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	aload_0;
+					invokevirtual 7;		// selectingApplet()Z
+					ifeq L3;
+				L2:	return;
+				L3:	aload_2;
+					sconst_0;
+					baload;
+					sspush 255;
+					sand;
+					s2b;
+					bspush -128;
+					if_scmpeq L5;
+				L4:	sspush 28160;
+					invokestatic 8;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	aload_0;
+					invokespecial 9;		// biomanager/pkg/BiomanagerInterface.getBioManagerHandle()V
+					aload_2;
+					sconst_1;
+					baload;
+					stableswitch L14 1 8 L6 L7 L8 L9 L10 L11 L12 L13;
+				L6:	aload_0;
+					aload_1;
+					invokevirtual 10;		// processVerifyFingerprint(Ljavacard/framework/APDU;)V
+					return;
+				L7:	aload_0;
+					aload_1;
+					invokevirtual 11;		// processGetCounter(Ljavacard/framework/APDU;)V
+					return;
+				L8:	aload_0;
+					aload_1;
+					invokevirtual 12;		// processGetSupportedFingers(Ljavacard/framework/APDU;)V
+					return;
+				L9:	aload_0;
+					aload_1;
+					invokevirtual 13;		// processGetBiomanagerStatus(Ljavacard/framework/APDU;)V
+					return;
+				L10:	aload_0;
+					aload_1;
+					invokevirtual 14;		// processEnableBiomanager(Ljavacard/framework/APDU;)V
+					return;
+				L11:	aload_0;
+					aload_1;
+					invokevirtual 15;		// processResetCounter(Ljavacard/framework/APDU;)V
+					return;
+				L12:	aload_0;
+					aload_1;
+					invokevirtual 16;		// processChangeEPIN(Ljavacard/framework/APDU;)V
+					return;
+				L13:	sspush -28672;
+					invokestatic 8;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+				L14:	sspush 27904;
+					invokestatic 8;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+		}
+
+		.method public processVerifyFingerprint(Ljavacard/framework/APDU;)V 8 {
+			.stack 4;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					sspush 768;
+					sconst_0;
+					sconst_2;
+					invokeinterface 4 18 0;		// org/globalplatform/broker/CDCVMBrokerCallbackRequest
+					aload_2;
+					sconst_0;
+					getfield_s_this 0;		// short biomanager/pkg/BiomanagerInterface.MATCHING_STATUS
+					invokestatic 19;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_2;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processGetCounter(Ljavacard/framework/APDU;)V 9 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 258;
+					aload_2;
+					sconst_3;
+					aload_2;
+					sconst_4;
+					baload;
+					sconst_2;
+					sadd;
+					aload_2;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processGetSupportedFingers(Ljavacard/framework/APDU;)V 10 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 261;
+					aload_2;
+					sconst_3;
+					aload_2;
+					sconst_4;
+					baload;
+					sconst_2;
+					sadd;
+					aload_2;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processGetBiomanagerStatus(Ljavacard/framework/APDU;)V 11 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 260;
+					aload_2;
+					sconst_3;
+					aload_2;
+					sconst_4;
+					baload;
+					sconst_2;
+					sadd;
+					aload_2;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processEnableBiomanager(Ljavacard/framework/APDU;)V 12 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 523;
+					aconst_null;
+					sconst_0;
+					sconst_0;
+					aconst_null;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_2;
+					sconst_0;
+					sload_3;
+					invokestatic 19;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_2;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processResetCounter(Ljavacard/framework/APDU;)V 13 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 525;
+					aconst_null;
+					sconst_0;
+					sconst_0;
+					aconst_null;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_2;
+					sconst_0;
+					sload_3;
+					invokestatic 19;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_2;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method public processChangeEPIN(Ljavacard/framework/APDU;)V 14 {
+			.stack 7;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 6;		// getBuffer()[B
+					astore_2;
+				L1:	sconst_0;
+					sstore_3;
+				L2:	aload_2;
+					sconst_4;
+					baload;
+					bspush 8;
+					if_scmpeq L4;
+				L3:	sspush 27013;
+					invokestatic 8;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					ifnull L6;
+				L5:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					checkcast 0 21;		// T_CLASSORINTERFACE com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sspush 514;
+					aload_2;
+					sconst_5;
+					bspush 8;
+					aconst_null;
+					sconst_0;
+					invokeinterface 7 21 1;		// com/ifx/javacard/applets/biometry/biomanager/CDCVMBrokerCallbackRequestX
+					sstore_3;
+					aload_2;
+					sconst_0;
+					sload_3;
+					invokestatic 19;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_2;
+					invokevirtual 20;		// setOutgoingAndSend(SS)V
+				L6:	return;
+		}
+
+		.method public onBrokerEvent(SSSSSSSSS)V 15 {
+			.stack 2;
+			.locals 0;
+
+				L0:	sload 4;
+					putfield_s_this 0;		// short biomanager/pkg/BiomanagerInterface.MATCHING_STATUS
+					sload 9;
+					putfield_s_this 1;		// short biomanager/pkg/BiomanagerInterface.MATCHING_SCORE
+					return;
+		}
+
+		.method private getBioManagerHandle()V {
+			.stack 7;
+			.locals 1;
+
+				L0:	getfield_a_this 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					ifnonnull L5;
+				L1:	aconst_null;
+					sspush -30719;
+					invokestatic 22;		// org/globalplatform/GPSystem.getService(Ljavacard/framework/AID;S)Lorg/globalplatform/GlobalService;
+					astore_1;
+				L2:	aload_1;
+					ifnull L4;
+				L3:	aload_0;
+					aload_1;
+					aconst_null;
+					invokestatic 23;		// org/globalplatform/GPSystem.getRegistryEntry(Ljavacard/framework/AID;)Lorg/globalplatform/GPRegistryEntry;
+					sconst_0;
+					aconst_null;
+					sconst_0;
+					sconst_0;
+					invokeinterface 6 24 0;		// org/globalplatform/GlobalService
+					checkcast 0 18;		// T_CLASSORINTERFACE org/globalplatform/broker/CDCVMBrokerCallbackRequest
+					putfield_a 2;		// reference biomanager/pkg/BiomanagerInterface.BIOMANAGER_HANDLE
+					goto L5;
+				L4:	sspush 27265;
+					invokestatic 8;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	return;
+		}
+
+		.method public getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable; 5 {
+			.stack 1;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/AID;	1.6;
+			.descriptor	Ljavacard/framework/Shareable;	1.2;
+
+				L0:	aload_0;
+					areturn;
+		}
+
+	}
+
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project name="BiomanagerInterface" oid="1770275736902" sourceFolder="src" version="2.0">
+            
+    
+    <WorkspaceDevEnv name="SLJ39B_Bio" oid="1770197457245"/>
+            
+    
+    <CustomEnvSettings name="" oid="">
+                        
+        
+        <JCDK version=""/>
+                        
+        
+        <GP version=""/>
+                        
+        
+        <JCCompiler version=""/>
+                        
+        
+        <LibraryList/>
+                    
+    
+    </CustomEnvSettings>
+            
+    
+    <PackageList>
+                
+        <PackageInfo aid="0xA0:0x00:0x00:0x00:0x04" name="biomanager.pkg" oid="1770275737140" version="1.0">
+                        
+            <ConverterArgs>
+                                
+                <PackageCompatibility type="NONE">
+                                        
+                    <ExpPath/>
+                                    
+                </PackageCompatibility>
+                                
+                <GenerateDebug>true</GenerateDebug>
+                                
+                <UserSpecified>-target 3.1.0;</UserSpecified>
+                            
+            </ConverterArgs>
+                        
+            <AppletList>
+                <AppletInfo aid="0xA0:0x00:0x00:0x00:0x04:0x10:0x10" name="BiomanagerInterface" oid="1770275737166"/>
+            </AppletList>
+                    
+        </PackageInfo>
+            
+    </PackageList>
+        
+
+</Project>

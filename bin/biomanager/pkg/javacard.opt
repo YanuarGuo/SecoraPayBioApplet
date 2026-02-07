@@ -1,0 +1,5 @@
+-debug
+-out JCA EXP CAP
+-exportpath .;"C:/Program Files/Infineon Technologies/Java Card IDE 5.3/eclipse/plugins/com.infineon.jcide.gp221v16_4.4.2/gp16/";"C:/Program Files/Infineon Technologies/Java Card IDE 5.3/eclipse/plugins/com.infineon.jcide.gpcl13_4.4.2/gpcl13/";"C:/Program Files/Infineon Technologies/Java Card IDE 5.3/eclipse/plugins/com.infineon.jcide.SLJ39Bxxxxxxx_1.0.0/exp";"..\..\..\Biometric Payment Solutions\Documentations\OperatingSystem\BioManagerAPI\SLJ39B_Infineon_Biomanager_API\api_export_files";"..\..\org.globalplatform.broker-1.1\exports"
+-applet 0xA0:0x00:0x00:0x00:0x04:0x10:0x10 BiomanagerInterface biomanager.pkg 0xA0:0x00:0x00:0x00:0x04 1.0
+-target 3.1.0

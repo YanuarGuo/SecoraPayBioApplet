@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<LibraryList>
+    <Library libName="ECLIPSE_HOME\plugins\com.infineon.jcide.gp221v16_4.4.2\gp16"/>
+    <Library libName="ECLIPSE_HOME\plugins\com.infineon.jcide.gpcl13_4.4.2\gpcl13\gpapi-cl.jar"/>
+    <Library libName="ECLIPSE_HOME\plugins\com.infineon.jcide.SLJ39Bxxxxxxx_1.0.0\lib\proprietaryAPI.jar"/>
+    <Library libName="JCDK_3.1.0\lib\api_classic-3.1.0.jar"/>
+    <Library libName="D:\Biometric Payment Solutions\Documentations\OperatingSystem\BioManagerAPI\SLJ39B_Infineon_Biomanager_API\lib\biomanager.jar"/>
+    <Library libName="D:\InfineonIDEWorkspace\org.globalplatform.broker-1.1\gpapi-broker.jar"/>
+</LibraryList>
