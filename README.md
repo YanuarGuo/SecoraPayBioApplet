@@ -1,8 +1,7 @@
-#SECORA Pay Bio Documentation#
+# SECORA Pay Bio Documentation
 
 
-Life Cycle
-
+## Life Cycle
 * Factory state
 * Card Production
 * Ready to enroll
@@ -16,100 +15,46 @@ Life Cycle
 * Biometric disabled
 
 
-
-
-
-
-
-Product Configuration
-
+## Product Configuration
 * Module AID for EMV Library: D276000004150100000A0011
 * Module AID for Broker: A00000015108
 * Module AID for Biomanager: D27600000415020000090001
 * Applet module AID for Biomanager: D2760000041502000009000101
 
 
-
-
-
-
-
-Secure Channel Protocols (SCP)
-
+## Secure Channel Protocols (SCP)
 * SCP02, implementation options '15' and '55', key size TDES 128 bits
 * SCP03, implementation options '10' and '00', key sizes AES 128, 192, 256 bits
 * Avoid using SCP01 / SCP11
 * The product supports migrating from SCP '02' to SCP '03' and vice versa by updating the default keyset with corresponding key type
 
 
-
-
-
-
-
-Application Identifier (AID)
-
+## Application Identifier (AID)
 * AID of the ISD is ‘A000000003 000000’. The AID may be changed using the STORE DATA command as described in STORE DATA
 
 
-
-
-
-
-
-Load File Data Block Hash (LFDBH)
-
+## Load File Data Block Hash (LFDBH)
 * SHA 1
 * SHA 256
 
 
-
-
-
-
-
-Ciphered Load File Data Block (CLFDB)
-
+## Ciphered Load File Data Block (CLFDB)
 * TDES 2 Keys bits CBC
 * AES 128, 192, 256 CBC
 
 
-
-
-
-
-
-Disable Load Functionality
-
+## Disable Load Functionality
 * In addition, the load functionality with LFDB and CLFDB can be configured to be automatically disabled, independently of each other, when the card state is transitioned SECURED state. This configuration is possible by Infineon, during production
 * APDU to disable load of LFDB is: '80 E6 40 00 0B 00 00 00 00 05 EF 03 D9 01 02 00'
 
 
-
-
-
-
-
-APDU Command Reference
-
+## APDU Command Reference
 * SLJ39B\_AdminGuide, Table 6
 * SLJ39B\_BioManager\_Applet\_Concept\_Specification, Section 1.3 / Section 4
 * SLJ39B\_Biomanager\_Application\_User\_Guide, Section 7
 
 
-
-
-
-
-
-JC IDE Plugin SECORA Pay Bio, provides guidance to Infineon Customers about how to install and use the biometric functions in Javacard IDE (JCIDE) plugin for SECORA™ Pay Bio (SLJ39B) products.
-
-
-
-
-
-Biometric Manager Menu:
-
+## Biometric Manager Menu:
 * Perso BioManager
 * Enroll Finger 1 (captures in one go)
 * Enroll Finger 2 (captures in one go)
@@ -121,73 +66,44 @@ Biometric Manager Menu:
 * Get Enrollment State
 
 
-
-
-
-Command and response data field (lc \& data) of Perform Biometric Operation command
-
-START ENROLLMENT:
-
+## Command and response data field (lc \& data) of Perform Biometric Operation command
+### START ENROLLMENT:
 * P1P2: '01', Finger ID
 * Command: Absent
 * Response: 9000 and 2 bytes of response code followed by – ‘5B’-‘01’ – Value. Value between ‘0x00’ and ‘0x64’ indicating the percentage of estimation of the progress of the acquisition process. 6200 and 2 bytes of response code. Other SW and Data Absent
 
 
-
-
-
-CONTINUE ENROLLMENT:
-
+### CONTINUE ENROLLMENT:
 * P1P2: '03', Finger ID
 * Command: Absent
 * Response: 9000 and 2 bytes of response code followed by – ‘5B’-‘01’ – Value. Value between ‘0x00’ and ‘0x64’ indicating the percentage of estimation of the progress of the acquisition process. 6200 and 2 bytes of response code. Other SW and Data Absent
 
 
-
-
-
-ABORT ENROLLMENT:
-
+### ABORT ENROLLMENT:
 * P1P2: '02', Finger ID
 * Command: Absent
 * Response: 9000 and 2 bytes of response code (27 EF). 6200 and 2 bytes of response code. Other SW and Data Absent
 
 
-
-
-
-VERIFY BIOMETRIC REFERENCE:
-
+### VERIFY BIOMETRIC REFERENCE:
 * P1P2: '0400'
 * Command: Absent
 * Response: 9000 and 5 bytes of response code indicating the matching info. 6200 and 2 bytes of response code. Other SW and Data Absent
 
 
-
-
-
-WIPE BIOMETRIC REFERENCE:
-
+### WIPE BIOMETRIC REFERENCE:
 * P1P2: '0500'
 * Command: Absent
 * Response: 9000/Other SW and Data Absent. 6200 and 2 bytes of response code
 
 
-
-
-
-FINALIZE ENROLLMENT:
-
+### FINALIZE ENROLLMENT:
 * P1P2: '8000'
 * Command: Absent 
 * Response: 9000/Other SW and Data Absent. 6200 and 2 bytes of response code
 
 
-
-
-
-Common BioService Response Message:
-
+## Common BioService Response Message:
 * CB 21 : BIO\_SRV\_STATUS\_PASS 
 * AB 17 : BIO\_SRV\_STATUS\_FAIL 
 * 8D DE : BIO\_SRV\_REJECT\_TIMEOUT 
@@ -208,346 +124,196 @@ Common BioService Response Message:
 * EC 95 : BIO\_SRV\_FINGER\_CHECK\_FAIL 
 
 
-
-
-
-PERSONALIZATION FLOW AND COMMANDS
-
-
+## PERSONALIZATION FLOW AND COMMANDS
 
 **Pre-Perso Steps (Optional)**
-
 -> Card reset 
-
 <- ATR 
 
-
-
 -> SELECT card manager 
-
 <- Card manager file control information (FCI), '9000'
 
-
 -> INITIALIZE UPDATE 
-
 <- Key information and card challenge, '9000'
 
 
-
 -> EXTERNAL AUTHENTICATE 
-
 <- 9000
-
-
 
 -> PUT KEY (key rotation)  
-
 <- 9000
-
 
 
 **Application Installation**
-
 -> Card reset 
-
 <- ATR 
 
-
-
 -> SELECT card manager 
-
 <- Card manager FCI, '9000'
 
-
-
 -> INITIALIZE UPDATE 
-
 <- Key information and card challenge, '9000'
 
-
-
 -> EXTERNAL AUTHENTICATE 
-
 <- 9000 
-
-
 
 -> INSTALL \[for install and make selectable] Biomanager Application 
-
 <- 9000 
-
-
 
 -> SET STATUS (set card life cycle state to INITIALIZED) – Optional step 
-
 <- 9000 
-
 
 
 **Perso Steps via Biomanager Applet Selection**
-
 -> Card reset 
-
 <- ATR 
 
-
-
 -> SELECT Biomanager Application 
-
 <- 9000 
-
-
 
 -> INITIALIZE UPDATE 
-
 <- Key information and card challenge, '9000'
 
-
-
 -> EXTERNAL AUTHENTICATE 
-
 <- 9000
-
-
 
 -> STORE DATA first DGI 
-
 <- 9000
 
-
-
 -> STORE DATA second DGI 
-
 <- 9000 
-
-
 
 \[...] 
 
-
-
 -> STORE DATA last DGI (LAST STORE DATA) 
-
 <- 9000 
-
 
 
 **Perso Steps via Install for Perso**
-
 -> Card reset 
-
 <- ATR 
 
-
-
 -> SELECT Secure Domain application 
-
 <- Secure Domain application FCI, '9000'
 
-
-
 -> INITIALIZE UPDATE 
-
 <- Key information and card challenge, '9000'
 
-
-
 -> EXTERNAL AUTHENTICATE 
-
 <- 9000 
-
-
 
 -> INSTALL \[for personalize] Biomanager Application 
-
 <- 9000 
-
-
 
 -> STORE DATA first DGI 
-
 <- 9000 
-
-
 
 -> STORE DATA second DGI 
-
 <- 9000 
-
-
 
 \[...] 
 
-
-
 -> STORE DATA last DGI (LAST STORE DATA) 
-
 <- 9000 
 
 
 
 **Post-Perso Steps (Optional)**
-
 -> Card reset 
-
 <- ATR
 
-
-
 -> SELECT card manager 
-
 <- Card manager FCI, '9000'
 
-
-
 -> INITIALIZE UPDATE 
-
 <- Key information and card challenge 
 
-
-
 -> EXTERNAL AUTHENTICATE 
-
 <- 9000
-
-
 
 -> SET STATUS (set card life cycle state to SECURED) 
-
 <- 9000 
-
-
 
 -> PUT KEY (key rotation) 
-
 <- 9000
 
-
-
 -> STORE DATA (CPLC)  
-
 <- 9000 
 
 
-
-
-
-Supported DGIs (Data Grouping Identifier)
-
-
-
-Presence of DGI:
-
+## Supported DGIs (Data Grouping Identifier)
+### Presence of DGI:
 * O = Optional DGI
 * M = Mandatory DGI
 
-
-
-C001
-
+### C001
 * Data Element: BSOC settings
 * Length: 2/3 | 1 | 1 | 1 (in order)
 * Presence: O | M | M | O (in order)
 * Value: ... | Re-enrollment support | Re-enrollment max count | Anti spoofing support (in order)
 
-
-
-C002
-
+### C002
 * Data Element: Biometric enrollment config data
 * Length: 1
 * Presence: O
 * Value: Number of sub templates to enroll for one finger
 
-
-
-C003
-
+### C003
 * Data Element: Biometric related data
 * Length: 2/3 | 1 | 1 | 1 (in order)
 * Presence: M | M | M | O (in order)
 * Value: ... | Biometric try limit | Biometric try counter | Number of fingers (in order)
 
-
-
-C004
-
+### C004
 * Data Element: Biometric enrollment activation data
 * Length: 10 | 8 | 1 | 1 (in order)
 * Presence: M | M | M | M (in order)
 * Value: ... | Enrollment PIN | Enroll PIN try limit | Enroll PIN try counter
 
-
-
-C005
-
+### C005
 * Data Element: Wait time for enroll
 * Length: 4
 * Presence: O
 * Value: Timer value in ms
 
-&nbsp;
-
-C006
-
+### C006
 * Data Element: Wait time for verify
 * Length: 4
 * Presence: O
 * Value: Timer value in ms
-
  
-
-C007
-
+### C007
 * Data Element: Applet AID whitelist
 * Length: Variable Max 240
 * Presence: M
 * Value: Whitelisted AID that used by applet with maximum of 240 bytes
 
- 
-
-C008
-
+### C008
 * Data Element: Low end enrollment
 * Length: 1
 * Presence: O
 * Value: Low end enrollment support
 
- 
-
 C00B
-
 * Data Element: Template update config
 * Length: 1
 * Presence: O
 * Value: 00 = not supported | 01-FE = Maximum number of times template is updated after enrollment on a successful biometric verification | FF = Template update happens throughout the lifetime of the card on a successful biometric verification
 
- 
-
 C00C
-
 * Data Element: Low end sleeve LEDs behavior patterns
 * Length: Variable
 * Presence: O
 * Value: Low end sleeve LEDs behavior patterns
 
- 
-
 C00D
-
 * Data Element: High end sleeve configuration
 * Length: 1
 * Presence: O
 * Value: High end sleeve configuration
 
- 
-
-
 
 **OPERATIONAL PHASE**
-
-
-
 Command supported
 
 * External auth: 84 82 xx 00 10
